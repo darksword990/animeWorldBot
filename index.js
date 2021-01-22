@@ -16,7 +16,7 @@ for (const dir of commands){
   }
 
 client.on('ready', async () => {
-    await client.user.setActivity(`OVER ${client.commands.size} || DEVELOPED BY Crawler#4512`, {type: 'WATCHING'})
+    await client.user.setActivity(`OVER ${client.commands.size} COMMANDS || DEVELOPED BY Crawler#4512`, {type: 'WATCHING'})
     console.log(`${client.user.tag} is ready!`)
 })
 
