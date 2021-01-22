@@ -40,7 +40,7 @@ module.exports = {
         }
         if (cmd.description) embed.description = cmd.description;
         if (cmd.aliases) embed.fields.push({name: `Aliases`, value: cmd.aliases.join(", ")});
-        if (cmd.usage) embed.fields.push({name: `Usage`, value: `${prefix}${cmd.usage}`});
+        if (cmd.usage) embed.fields.push({name: `Usage`, value: `${prefix}${name} ${cmd.usage}`});
         message.channel.send({embed})
     }
 }
