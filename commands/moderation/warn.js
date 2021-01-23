@@ -27,11 +27,11 @@ module.exports = {
                 await warningschema.findOneAndUpdate(
                     {
                         Guild: message.guild.id,
-                        memberID: message.mentions.members.first().id
+                        memberID: member.id
                     },
                     {
                         Guild: message.guild.id,
-                        memberID: message.mentions.members.first().id,
+                        memberID: member.id,
                         $push: {
                             warns: warning
                         }
@@ -40,7 +40,7 @@ module.exports = {
                         upsert: true
                     }
                 )
-                message.channel.send(`${message.mentions.members.first().user.tag} has been warned!`)
+                message.channel.send(`${member.user.tag} has been warned!`)
             })
         }
     }
