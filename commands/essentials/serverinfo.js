@@ -9,15 +9,6 @@ module.exports = {
         const textc = guild.channels.cache.filter(f => f.type == `text`).size
         const bots = guild.members.cache.filter(f => f.user.bot).size
         const humans = guild.members.cache.filter(f => !f.user.bot).size
-        let lockedtext;
-        let lockedvc;
-        if (!guild.roles.cache.filter(f => f.name.includes(`Member`))) {
-            lockedtext = guild.channels.cache.filter(f => f.type == `text` && !f.permissionsFor(message.guild.id).has(`VIEW_CHANNEL`)).size
-            lockedvc = guild.channels.cache.filter(f => f.type == `voice` && !f.permissionsFor(message.guild.id).has(`VIEW_CHANNEL`)).size
-        } else {
-            lockedtext = guild.channels.cache.filter(f => f.type == `text` && !f.permissionsFor(guild.roles.cache.find(f => f.name.includes(`Member`))).has(`VIEW_CHANNEL`)).size
-            lockedvc = guild.channels.cache.filter(f => f.type == `voice` && !f.permissionsFor(guild.roles.cache.find(f => f.name.includes(`Member`))).has(`VIEW_CHANNEL`)).size
-        }
         const embed = {
             color: 0x7788d9,
             title: `Info for ${guild.name}`,
@@ -55,7 +46,7 @@ module.exports = {
         embed.fields.push(
             {
                 name: `Channels`,
-                value: `Total Channels: ${vc+textc}\nVoice Channels: ${vc}(${lockedvc} locked VCs)\nText Channels: ${textc}(${lockedtext} locked Text Channels)`,
+                value: `Total Channels: ${vc+textc}\nVoice Channels: ${vc}\nText Channels: ${textc}`,
                 inline: true
             }
         )
