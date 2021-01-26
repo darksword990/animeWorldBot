@@ -12,7 +12,7 @@ module.exports = {
         }
         let bansinfos = []
         for (const ban of bansarray) {
-            bansinfos.push(`<@${ban.user.id}>: ${ban.reason}`)
+            bansinfos.push(`<@${ban.user.id}>`)
         }
         const embed = {
             color: 0xff0000,
@@ -21,7 +21,7 @@ module.exports = {
                 icon_url: message.member.user.displayAvatarURL({format: 'png', dynamic: true})
             },
             title: `Guild Bans`,
-            description: bansinfos.join("\n\n")
+            description: bansinfos.join(", ")
         }
         message.channel.send({embed})
     }
