@@ -21,7 +21,7 @@ module.exports = {
                 icon_url: message.member.user.displayAvatarURL({format: 'png', dynamic: true})
             },
             title: `Guild Bans`,
-            description: bansinfos.join(", ")
+            description: `Below are the banned users:\n${bansinfos.join(", ")}`
         }
         message.channel.send({embed})
     }
