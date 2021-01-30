@@ -4,6 +4,7 @@ const mongo = require('../mongo');
 let prefix;
 
 module.exports = async (message, client) => {
+    if (!message.guild) return;
     if (message.webhookID) return;
     await message.guild.members.fetch()
     if (!message.member.hasPermission(["ADMINISTRATOR"])){
@@ -33,8 +34,6 @@ module.exports = async (message, client) => {
   const filter = m => m.author.id == message.author.id
   
   if (!message.content.toLowerCase().startsWith(prefix)) return;
-
-  if (!message.guild) return;
 
   if (cmd.length === 0) return;
 
