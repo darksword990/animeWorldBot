@@ -16,6 +16,7 @@ for (const dir of commands){
   }
 
 client.on('ready', async () => {
+  client.setMaxListeners(50)
     await client.user.setActivity(`OVER ${client.commands.size} COMMANDS || DEVELOPED BY Crawler#4512`, {type: 'WATCHING'})
     console.log(`${client.user.tag} is ready!`)
 })
