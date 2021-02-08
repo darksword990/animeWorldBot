@@ -30,8 +30,6 @@ module.exports = async (message, client) => {
 
   const args = message.content.slice(prefix.length).trim().split(/ +/g);
   const cmd = args.shift().toLowerCase();
-
-  const filter = m => m.author.id == message.author.id
   
   if (!message.content.toLowerCase().startsWith(prefix)) return;
 

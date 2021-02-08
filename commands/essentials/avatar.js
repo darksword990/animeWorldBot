@@ -3,7 +3,7 @@ module.exports = {
     description: 'Shows mentioned member\'s profile picture or your own profile picture',
     aliases: ['av'],
     category: `essentials`,
-    usage: `<member>(optional)`,
+    usage: `<member mention/member id>(optional)`,
     run: async (client, message, args, prefix) => {
         if (!args.length) {
             return message.channel.send(
