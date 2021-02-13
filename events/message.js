@@ -1,5 +1,6 @@
 const prefixschema = require('../schemas/prefix-schema')
 const mongo = require('../mongo');
+const edschema = require('../schemas/enable-disable-cmd-schema')
 
 let prefix;
 
@@ -20,28 +21,45 @@ module.exports = async (message, client) => {
             }
         }
     }
-  
-  await mongo().then(async mongoose => {
-    
-      let newPrefix = await prefixschema.findOne({Guild: message.guild.id});
-      newPrefix ? (prefix = newPrefix.Prefix) : (prefix = "!");
-    
-  })
 
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const cmd = args.shift().toLowerCase();
-  
-  if (!message.content.toLowerCase().startsWith(prefix)) return;
+    await mongo().then(async mongoose => {
 
-  if (cmd.length === 0) return;
+        let newPrefix = await prefixschema.findOne({Guild: message.guild.id});
+        newPrefix ? (prefix = newPrefix.Prefix) : (prefix = "!");
 
-  let command = client.commands.get(cmd) || client.commands.find(c => c.aliases && c.aliases.includes(cmd));
+    })
 
-  if (!command) return;
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
 
-  if (!message.member.hasPermission(command.permissions)) {
-      return message.channel.send(`You don't have ${command.permissions.join(", ")} permissions`)
-  }
+    if (!message.content.toLowerCase().startsWith(prefix)) return;
 
-  command.run(client, message, args, prefix)
+    if (cmd.length === 0) return;
+
+    let command = client.commands.get(cmd) || client.commands.find(c => c.aliases && c.aliases.includes(cmd));
+
+    if (!command) return;
+
+    if (!message.member.hasPermission(command.permissions)) {
+        return message.channel.send(`You don't have ${command.permissions.join(", ")} permissions`)
+    }
+
+    let results = await edschema.findOne(
+        {
+            Guild: message.guild.id
+        }
+    )
+    if (!results) {
+        await new edschema(
+            {
+                Guild: message.guild.id,
+                Command: []
+            }
+        ).save()
+    }
+    if (results.Command.includes(command.name)) {
+        return message.channel.send(`This command is disabled`)
+    }
+
+    command.run(client, message, args, prefix)
 }
