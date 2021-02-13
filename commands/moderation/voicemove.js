@@ -5,6 +5,7 @@ module.exports = {
     category: 'moderation',
     usage: `<channelid>`,
     permissions: ['KICK_MEMBERS', 'BAN_MEMBERS'],
+    examples: ['337683258456328'],
     run: async (client, message, args) => {
         if (!args.length) return;
         if (message.member.voice.channel) {

@@ -41,6 +41,7 @@ module.exports = {
         if (cmd.description) embed.description = cmd.description;
         if (cmd.aliases) embed.fields.push({name: `Aliases`, value: cmd.aliases.join(", ")});
         if (cmd.usage) embed.fields.push({name: `Usage`, value: `${prefix}${name} ${cmd.usage}`});
+        if (cmd.examples) embed.fields.push({name: `Examples`, value: cmd.examples.map(f => `${prefix}${name} ${f}`).join("\n")});
         message.channel.send({embed})
     }
 }

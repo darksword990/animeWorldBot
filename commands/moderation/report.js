@@ -3,6 +3,7 @@ module.exports = {
     description: 'Reports the mentioned member',
     category: `moderation`,
     usage: `<user> <reason>(for proof you can do an attachment)`,
+    example: ['@Crawler Being abusive', '76832545763724554 Being abusive'],
     run: async (client, message, args, prefix) => {
         if (!args.length) return;
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])

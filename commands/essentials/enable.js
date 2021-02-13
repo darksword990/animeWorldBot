@@ -6,6 +6,8 @@ module.exports = {
     description: 'Enables the mentioned command',
     permissions: ['ADMINISTRATOR'],
     category: 'essentials',
+    usage: '<command name>',
+    example: ['kick', 'warn'],
     run: async (client, message, args) => {
         const commandName = args[0]
         const c = client.commands.get(commandName) || client.commands.find(c => c.aliases && c.aliases.includes(commandName));
