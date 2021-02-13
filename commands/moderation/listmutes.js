@@ -7,7 +7,7 @@ module.exports = {
     permissions: [`KICK_MEMBERS`],
     category: `moderation`,
     run: async (client, message, args, prefix) => {
-        let mutes = message.guild.roles.find(f => {return f.name.includes('Muted')})
+        let mutes = message.guild.roles.cache.find(f => {return f.name.includes('Muted')})
         let mutedmembers = mutes.members.map(f => f.user.tag)
         let currentpage = 0
         let embeds = generateEmbeds(mutedmembers)
