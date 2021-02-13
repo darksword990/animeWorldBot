@@ -22,7 +22,7 @@ module.exports = {
                 }
             )
         }
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(f => f.name.includes(args.join(" ")))
+        const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(f => f.displayName.includes(args.join(" ")))
         if (member) {
             message.channel.send(
                 {
