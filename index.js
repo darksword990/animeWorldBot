@@ -25,8 +25,4 @@ client.on('message', message => {
     require('./events/message')(message, client)
 })
 
-client.on('guildMemberAdd', member => {
-  require('./events/muteOnjoin')(member, client)
-})
-
 client.login(process.env.ServerBotToken)
