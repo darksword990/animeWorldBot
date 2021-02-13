@@ -9,6 +9,7 @@ module.exports = {
     run: async (client, message, args, prefix) => {
         let mutes = message.guild.roles.cache.find(f => {return f.name.includes('Muted')})
         let mutedmembers = mutes.members.map(f => f.user.tag)
+        if (mutedmembers.length == 0) return message.channel.send(`There are no muted members!`);
         let currentpage = 0
         let embeds = generateEmbeds(mutedmembers)
         const embed = {
