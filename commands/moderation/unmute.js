@@ -6,7 +6,7 @@ module.exports = {
     permissions: ['KICK_MEMBERS'],
     category: `moderation`,
     usage: `<user>`,
-    example: ['@Crawler', '76832545763724554'],
+    examples: ['@Crawler', '76832545763724554'],
     run: async (client, message, args, prefix) => {
         if (!args.length) return;
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])

@@ -4,7 +4,7 @@ module.exports = {
     permissions: ['KICK_MEMBERS'],
     category: `moderation`,
     usage: `<user> <reason>`,
-    example: ['@Crawler Being abusive', '76832545763724554 Being abusive'],
+    examples: ['@Crawler Being abusive', '76832545763724554 Being abusive'],
     run: async (client, message, args, prefix) => {
         if (!args.length) return;
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0])

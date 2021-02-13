@@ -4,7 +4,7 @@ module.exports = {
     permissions: ['BAN_MEMBERS'],
     category: `moderation`,
     usage: `<user>`,
-    example: ['76832545763724554'],
+    examples: ['76832545763724554'],
     run: async (client, message, args, prefix) => {
         if (!args.length) return;
         if (isNaN(parseInt(args[0]))) return;
