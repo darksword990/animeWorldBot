@@ -2,6 +2,10 @@ const disable = require('../../schemas/enable-disable-cmd-schema')
 
 module.exports = {
     name: `disablecmd`,
+    aliases: ['disable'],
+    description: 'Disables the mentioned command',
+    permissions: ['ADMINISTRATOR'],
+    category: 'essentials',
     run: async (client, message, args) => {
         const commandName = args[0]
         const c = client.commands.get(commandName) || client.commands.find(c => c.aliases && c.aliases.includes(commandName));
