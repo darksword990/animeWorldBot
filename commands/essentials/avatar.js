@@ -27,7 +27,6 @@ module.exports = {
             strings.push(arg.toLowerCase())
         }
         const member = message.guild.members.cache.find(f => f.displayName.toLowerCase().includes(strings.join(" "))) || message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        console.log(member)
         if (member) {
             message.channel.send(
                 {
