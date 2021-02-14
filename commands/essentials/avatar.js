@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['av'],
     category: `essentials`,
     usage: `<member mention/member id>(optional)`,
-    examples: ['@Crawler', '767858235465342'],
+    examples: ['@Crawler', '767858235465342', 'crawler', 'thor'],
     run: async (client, message, args, prefix) => {
         if (!args.length) {
             return message.channel.send(
