@@ -17,7 +17,7 @@ for (const dir of commands){
 
 client.on('ready', async () => {
   client.setMaxListeners(50)
-    await client.user.setActivity(`OVER ${client.commands.size} COMMANDS || DEVELOPED BY Crawler#4512`, {type: 'WATCHING'})
+    await client.user.setActivity(`OVER ${client.commands.size} COMMANDS || DEVELOPED BY Crawler#4512`, {type: 'STREAMING', url: `https://www.youtube.com/watch?v=DLzxrzFCyOs&ab_channel=AllKindsOfStuff`})
     console.log(`${client.user.tag} is ready!`)
 })
 
