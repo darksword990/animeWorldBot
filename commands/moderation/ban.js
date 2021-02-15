@@ -21,6 +21,7 @@ module.exports = {
             await member.ban({days: 7, reason: `${message.member.user.tag}: ${args.join(" ")}`})
         } else if (Array.isArray(member)) {
             if (member.length != 0) {
+                let arr = []
                 member.forEach(async m => {
                     const botRole = client.guilds.cache.get(message.guild.id).member(client.user.id).roles.highest.position
                     if (botRole <= m.roles.highest.position) return message.channel.send(`Bot must be higher than the mentioned member!`);
@@ -29,9 +30,10 @@ module.exports = {
                     if (message.member.id == m.id) return message.channel.send(`You can't ban yourself!`);
                     if (m.user.bot) return message.channel.send(`You can't ban the bot!`);
                     args.shift()
-                    message.channel.send(`${m.user.tag} has been banned!`)
+                    arr.push(`${m.user.tag}`)
                     await m.ban({days: 7, reason: `${message.member.user.tag}: ${args.join(" ")}`})
                 })
+                message.channel.send(`${arr.join(", ")} have been banned!`)
             }
         }
     }
