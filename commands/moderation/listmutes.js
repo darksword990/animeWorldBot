@@ -1,5 +1,3 @@
-const mongo = require('../../mongo')
-
 module.exports = {
     name: 'listmutes',
     aliases: ['lmutes', 'lm'],
@@ -8,6 +6,7 @@ module.exports = {
     category: `moderation`,
     run: async (client, message, args, prefix) => {
         let mutes = message.guild.roles.cache.find(f => {return f.name.includes('Muted')})
+        if (!mutes) return;
         let mutedmembers = mutes.members.map(f => f.user.tag)
         if (mutedmembers.length == 0) return message.channel.send(`There are no muted members!`);
         let currentpage = 0
@@ -18,7 +17,7 @@ module.exports = {
                 name: message.member.user.tag,
                 icon_url: message.member.user.displayAvatarURL({format: 'png', dynamic: true})
             },
-            title: `Guild Bans`,
+            title: `Guild Mutes`,
             description: embeds[currentpage],
             footer: {
                 text: `Current Page ${currentpage+1}/${embeds.length}`
