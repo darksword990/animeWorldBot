@@ -1,4 +1,3 @@
-const economy = require('../../schemas/economy')
 const Discord = require('discord.js')
 const ms = require('ms')
 const fs = require('fs')
