@@ -16,7 +16,7 @@ module.exports = {
             )
             const currencyFractionDigits = new Intl.NumberFormat('en-US', {
                 style: 'currency',
-                currency: 'EUR',
+                currency: 'USD',
             }).resolvedOptions().maximumFractionDigits;
             
             const Wvalue = (bal.Wallet).toLocaleString('en-US', { maximumFractionDigits: currencyFractionDigits });
@@ -37,9 +37,16 @@ module.exports = {
                 }
             )
             if (!bal) return message.channel.send('That member doesn\'t have money');
+            const currencyFractionDigits = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+            }).resolvedOptions().maximumFractionDigits;
+            
+            const Wvalue = (bal.Wallet).toLocaleString('en-US', { maximumFractionDigits: currencyFractionDigits });
+            const Bvalue = (bal.Bank).toLocaleString('en-US', { maximumFractionDigits: currencyFractionDigits });
             let embed = {
                 title: message.member.user.username + `'s Balance`,
-                description: `**Wallet:** :coin: ${bal.Wallet}\n**Bank:** :coin: ${bal.Bank}`
+                description: `**Wallet:** :coin: ${Wvalue}\n**Bank:** :coin: ${Bvalue}`
             }
             message.channel.send({embed})
         }
