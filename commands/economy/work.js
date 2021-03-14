@@ -20,6 +20,7 @@ module.exports = {
     examples: ['professor', 'doctor', 'youtuber'],
     availableProfessions: returnAvailableProfessions(),
     run: async (client, message, args) => {
+        if (!args.length) return;
         const economyCooldowns = client.economyCooldowns
         const economyProfessions = client.economyProfessions
         const chosenProfession = args[0].toLowerCase()
