@@ -45,6 +45,10 @@ module.exports = async (message, client) => {
             }
         ).save()
     }
+    const botMention = message.mentions.members.first()
+    if (botMention && botMention.id == client.user.id && message.content.startsWith('<@')) {
+      message.channel.send(`My prefix for this guild is \`${prefix}\``)
+    }
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
