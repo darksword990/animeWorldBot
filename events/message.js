@@ -22,12 +22,10 @@ module.exports = async (message, client) => {
         }
     }
 
-    await mongo().then(async mongoose => {
+    await mongo()
 
-        let newPrefix = await prefixschema.findOne({Guild: message.guild.id});
-        newPrefix ? (prefix = newPrefix.Prefix) : (prefix = "!");
-
-    })
+    let newPrefix = await prefixschema.findOne({Guild: message.guild.id});
+    newPrefix ? (prefix = newPrefix.Prefix) : (prefix = "!");
 
     let bal = await economy.findOne(
         {
