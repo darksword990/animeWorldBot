@@ -48,7 +48,7 @@ module.exports = {
                         failedtobanmembers.push(`Couldn't ban ${m1.user.username}, Bot must be higher than the mentioned member!`);
                         continue;
                     }
-                    if (message.member.roles.highest.position <= m1.roles.highest.position && !message.guild.owner) {
+                    if (message.member.roles.highest.position <= m1.roles.highest.position) {
                         failedtobanmembers.push(`Couldn't ban ${m1.user.username}, You can't ban a person higher than you!`);
                         continue;
                     }
