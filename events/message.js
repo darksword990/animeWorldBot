@@ -1,6 +1,6 @@
 const prefixschema = require('../schemas/prefix-schema')
 const mongo = require('../mongo');
-const edschema = require('../schemas/enable-disable-cmd-schema')
+const economy = require('../schemas/economy')
 
 let prefix;
 
@@ -29,6 +29,23 @@ module.exports = async (message, client) => {
 
     })
 
+    let bal = await economy.findOne(
+        {
+            Guild: message.guild.id,
+            userID: message.member.id
+        }
+    )
+    if (!bal) {
+        await new economy(
+            {
+                Guild: message.guild.id,
+                userID: message.member.id,
+                Wallet: 0,
+                Bank: 0
+            }
+        ).save()
+    }
+
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
@@ -42,23 +59,6 @@ module.exports = async (message, client) => {
 
     if (!message.member.hasPermission(command.permissions)) {
         return message.channel.send(`You don't have ${command.permissions.join(", ")} permissions`)
-    }
-
-    let results = await edschema.findOne(
-        {
-            Guild: message.guild.id
-        }
-    )
-    if (!results) {
-        await new edschema(
-            {
-                Guild: message.guild.id,
-                Command: []
-            }
-        ).save()
-    }
-    if (results.Command.includes(command.name)) {
-        return message.channel.send(`This command is disabled`)
     }
 
     command.run(client, message, args, prefix)

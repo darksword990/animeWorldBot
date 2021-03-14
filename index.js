@@ -2,9 +2,19 @@ const Discord = require('discord.js')
 const env = require('dotenv')
 const client = new Discord.Client()
 client.commands = new Discord.Collection()
+client.economyProfessions = new Discord.Collection()
+client.economyCooldowns = new Discord.Collection()
 const fs = require('fs')
 const commands = fs.readdirSync('./commands')
 env.config()
+
+const professionFiles = fs.readdirSync('./economyProfessions').filter(f => f.endsWith('.js'))
+
+for (const profession of professionFiles) {
+  const profile = require(`./economyProfessions/${profession}`)
+  client.economyProfessions.set(profile.name, profile)
+  console.log(`loaded profession: ${profile.name}`)
+}
 
 for (const dir of commands){
     const commandfiles = fs.readdirSync(`./commands/${dir}/`).filter(f => f.endsWith('.js'))

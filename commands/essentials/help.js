@@ -9,6 +9,7 @@ module.exports = {
         const { commands } = client
         let essentialCommands = commands.filter(f => f.category == `essentials`)
         let moderationCommands = commands.filter(f => f.category == `moderation`)
+        let economyCommands = commands.filter(f => f.category == `economy`)
         if (!args.length) {
             const embed = {
                 color: 0x00ffff,
@@ -17,11 +18,15 @@ module.exports = {
                 fields: [
                     {
                         name: `:hammer: Essential Commands`,
-                        value: `\`\`\`${essentialCommands.map(f => f.name).join(", ")}\`\`\``
+                        value: `[Hover for info](${message.url} "Essential Commands are just those commands which provide some info about server or any thing else depending on the command's functioning")\n\`\`\`${essentialCommands.map(f => f.name).join(", ")}\`\`\``
                     },
                     {
                         name: `:shield: Moderation Commands`,
-                        value: `\`\`\`${moderationCommands.map(f => f.name).join(", ")}\`\`\``
+                        value: `[Hover for info](${message.url} "With Moderation Commands, you can moderate the server for it. Make sure to follow their command arguments!")\n\`\`\`${moderationCommands.map(f => f.name).join(", ")}\`\`\``
+                    },
+                    {
+                        name: `:moneybag: Economy Commands`,
+                        value: `[Hover for info](${message.url} "Economy Commands are fun commands just you don't get bored :D")\n\`\`\`${economyCommands.map(f => f.name).join(", ")}\`\`\``
                     }
                 ]
             }
@@ -35,13 +40,14 @@ module.exports = {
         let emoji;
         const embed = {
             color: 0x00ffff,
-            title: `${(cmd.category == `essentials`) ? (emoji = `:hammer:`) : (emoji = `:shield:`)} ${name.capitalize()} Command`,
+            title: `${(cmd.category == `essentials`) ? (emoji = `:hammer:`) : (cmd.category == `moderation`) ? (emoji = `:shield:`) : (emoji = `:moneybag:`)} ${name.capitalize()} Command`,
             fields: []
         }
         if (cmd.description) embed.description = cmd.description;
         if (cmd.aliases) embed.fields.push({name: `Aliases`, value: cmd.aliases.join(", ")});
         if (cmd.usage) embed.fields.push({name: `Usage`, value: `${prefix}${name} ${cmd.usage}`});
         if (cmd.examples) embed.fields.push({name: `Examples`, value: cmd.examples.map(f => `${prefix}${name} ${f}`).join("\n")});
+        if (cmd.availableProfessions) embed.fields.push({name: `Available Professions`, value: cmd.availableProfessions.join(", ")});
         message.channel.send({embed})
     }
 }
