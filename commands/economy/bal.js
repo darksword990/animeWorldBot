@@ -14,9 +14,16 @@ module.exports = {
                     userID: message.member.id
                 }
             )
+            const currencyFractionDigits = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'EUR',
+            }).resolvedOptions().maximumFractionDigits;
+            
+            const Wvalue = (bal.Wallet).toLocaleString('en-US', { maximumFractionDigits: currencyFractionDigits });
+            const Bvalue = (bal.Bank).toLocaleString('en-US', { maximumFractionDigits: currencyFractionDigits });
             let embed = {
                 title: message.member.user.username + `'s Balance`,
-                description: `**Wallet:** :coin: ${bal.Wallet}\n**Bank:** :coin: ${bal.Bank}`
+                description: `**Wallet:** :coin: ${Wvalue}\n**Bank:** :coin: ${Bvalue}`
             }
             message.channel.send({embed})
             return;
